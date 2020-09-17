@@ -5735,6 +5735,9 @@ defmodule AWS.S3 do
   defp build_host(_endpoint_prefix, %{region: "local"}) do
     "localhost"
   end
+  defp build_host(endpoint_prefix, %{region: region, endpoint: endpoint, skip_prefix: true}) do
+    "#{region}.#{endpoint}"
+  end
   defp build_host(endpoint_prefix, %{region: region, endpoint: endpoint}) do
     "#{endpoint_prefix}.#{region}.#{endpoint}"
   end
